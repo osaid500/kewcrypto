@@ -17,17 +17,16 @@ body {
   main {
     padding: 2em;
 
-    .coins-info-container {
+    .coins-list {
       display: flex;
       flex-direction: column;
       gap: 1em;
+      // border: 1px solid green;
+      height: 30em;
+      overflow-y: scroll;
 
-      .coin-info:nth-child(even) .change-percent {
-        color: $green;
-      }
-
-      .coin-info:nth-child(odd) .change-percent {
-        color: $red;
+      &::-webkit-scrollbar {
+        display: none;
       }
 
       .coin-info {
@@ -36,6 +35,10 @@ body {
         align-items: center;
 
         font-size: 0.8rem;
+
+        .coin-logo {
+          width: 2em;
+        }
 
         .coin-title {
           display: flex;
@@ -54,12 +57,31 @@ body {
           }
         }
 
+        @mixin percentageArrowProps(
+          $color,
+          $arrow-color,
+          $angle,
+          $arrow-margin
+        ) {
+          background: rgba($color, $alpha: 0.14);
+          border-color: $color;
+
+          :nth-child(1) {
+            background-color: $arrow-color;
+          }
+
+          :nth-child(2) {
+            margin-top: $arrow-margin;
+            border-bottom: 7px solid $arrow-color;
+            transform: rotate($angle);
+          }
+        }
+
         .percentage-arrow {
-          background: rgba($green, $alpha: 0.14);
           width: 20px;
           height: 20px;
           border-radius: 50%;
-          border: 1.5px solid $green;
+          border: 1.5px solid;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -69,20 +91,34 @@ body {
           :nth-child(1) {
             width: 2px;
             height: 8px;
-            background-color: #15634e;
-            // border-radius: 20px;
             position: absolute;
           }
 
           :nth-child(2) {
             width: 0;
             height: 0;
-            margin-top: 5px;
             border-left: 5px solid transparent;
             border-right: 5px solid transparent;
-            border-bottom: 7px solid #15634e;
-            // border-radius: 10px;
-            transform: rotate(180deg);
+          }
+        }
+
+        &.up {
+          .percentage-arrow {
+            @include percentageArrowProps($green, #15634e, 0deg, -5px);
+          }
+
+          .change-percent {
+            color: $green;
+          }
+        }
+
+        &.down {
+          .percentage-arrow {
+            @include percentageArrowProps($red, #ef476f, 180deg, 5px);
+          }
+
+          .change-percent {
+            color: $red;
           }
         }
 

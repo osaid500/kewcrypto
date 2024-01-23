@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var API_URL = "https://api.coincap.io/v2/assets";
-var coinsInfoContainer = document.querySelector(".coins-info-container");
+var coinsInfoContainer = document.querySelector(".coins-list");
 function fetchCoinData() {
     return __awaiter(this, void 0, void 0, function () {
         var response, data, error_1;
@@ -68,8 +68,11 @@ function renderCoins(coins) {
 }
 function createCoinElement(coin) {
     var coinElement = document.createElement("article");
+    var arrowDirection = coin.changePercent24Hr.includes("-") ? "down" : "up";
+    var logoUrl = "https://coinicons-api.vercel.app/api/icon/".concat(coin.symbol.toLocaleLowerCase());
     coinElement.classList.add("coin-info");
-    coinElement.innerHTML = "<div class=\"coin-title\">\n  <span>".concat(coin.name, "</span>\n      <span class=\"coin-symbol\">").concat(coin.symbol, "</span>\n    </div>\n    <div class=\"percentage-arrow\">\n    <span></span>\n    <span></span>\n    </div>\n    <div class=\"change-percent\">\n      <span>").concat(Number(coin.changePercent24Hr).toFixed(2), "%</span>\n    </div>\n    <div class=\"current-price\">$").concat(Number(coin.priceUsd).toFixed(2), "</div>");
+    coinElement.classList.add(arrowDirection);
+    coinElement.innerHTML = "<img class=\"coin-logo\" src=".concat(logoUrl, "></img>\n  <div class=\"coin-title\">\n  <span>").concat(coin.name, "</span>\n      <span class=\"coin-symbol\">").concat(coin.symbol, "</span>\n    </div>\n    <div class=\"percentage-arrow\">\n    <span></span>\n    <span></span>\n    </div>\n    <div class=\"change-percent\">\n      <span>").concat(Number(coin.changePercent24Hr).toFixed(2), "%</span>\n    </div>\n    <div class=\"current-price\">$").concat(Number(coin.priceUsd).toFixed(2), "</div>");
     return coinElement;
 }
 function init() {
