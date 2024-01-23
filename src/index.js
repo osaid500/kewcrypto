@@ -91,8 +91,17 @@ function init() {
 }
 init();
 function scrollCoins() {
-    setInterval(function () {
-        coinsList === null || coinsList === void 0 ? void 0 : coinsList.scrollBy(0, 1);
+    var direction = 1;
+    var speed = 3;
+    var scrollInterval = setInterval(function () {
+        coinsList === null || coinsList === void 0 ? void 0 : coinsList.scrollBy(0, direction * speed);
+        if ((coinsList === null || coinsList === void 0 ? void 0 : coinsList.scrollTop) >=
+            (coinsList === null || coinsList === void 0 ? void 0 : coinsList.scrollHeight) - (coinsList === null || coinsList === void 0 ? void 0 : coinsList.clientHeight)) {
+            direction = -1;
+        }
+        else if ((coinsList === null || coinsList === void 0 ? void 0 : coinsList.scrollTop) === 0) {
+            direction = 1;
+        }
     }, 30);
 }
 document.addEventListener("DOMContentLoaded", function () {

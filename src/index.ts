@@ -67,8 +67,20 @@ async function init(): Promise<void> {
 init();
 
 function scrollCoins() {
-  setInterval(() => {
-    coinsList?.scrollBy(0, 1);
+  let direction: number = 1;
+  let speed: number = 3;
+
+  const scrollInterval = setInterval(() => {
+    coinsList?.scrollBy(0, direction * speed);
+
+    if (
+      coinsList?.scrollTop >=
+      coinsList?.scrollHeight - coinsList?.clientHeight
+    ) {
+      direction = -1;
+    } else if (coinsList?.scrollTop === 0) {
+      direction = 1;
+    }
   }, 30);
 }
 
