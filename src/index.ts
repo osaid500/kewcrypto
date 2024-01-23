@@ -66,23 +66,48 @@ async function init(): Promise<void> {
 
 init();
 
+let direction: number = 1;
+let speed: number = 1;
+let velocity: number = 1;
+let delayTime: number = 2000;
+
 function scrollCoins() {
-  let direction: number = 1;
-  let speed: number = 3;
+  if (coinsList) {
+    setInterval(() => {
+      console.log(direction * speed * velocity);
+      coinsList.scrollBy(0, direction * speed * velocity);
 
-  const scrollInterval = setInterval(() => {
-    coinsList?.scrollBy(0, direction * speed);
-
-    if (
-      coinsList?.scrollTop >=
-      coinsList?.scrollHeight - coinsList?.clientHeight
-    ) {
-      direction = -1;
-    } else if (coinsList?.scrollTop === 0) {
-      direction = 1;
-    }
-  }, 30);
+      if (
+        coinsList.scrollTop >=
+        coinsList.scrollHeight - coinsList.clientHeight
+      ) {
+        setTimeout(() => {
+          direction = -1;
+        }, delayTime);
+      } else if (coinsList.scrollTop === 0) {
+        setTimeout(() => {
+          direction = 1;
+        }, delayTime);
+      }
+    }, 15);
+  }
 }
+
+function handleScroll(e, newVelocity: number = 0) {
+  if (e.target.classList.contains("coins-list")) e.stopPropagation();
+  if (newVelocity === 0) {
+    velocity = newVelocity;
+  } else {
+    setTimeout(() => {
+      velocity = newVelocity;
+    }, delayTime);
+  }
+}
+
+coinsList?.addEventListener("mouseover", (e) => handleScroll(e, 0));
+coinsList?.addEventListener("touchmove", (e) => handleScroll(e, 0));
+coinsList?.addEventListener("mouseleave", (e) => handleScroll(e, 1));
+coinsList?.addEventListener("touchend", (e) => handleScroll(e, 1));
 
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
