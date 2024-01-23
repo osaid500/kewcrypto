@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Lemon&display=swap");
+
+$green: #06d6a0;
+$red: #ef476f;
+
+body {
+  background-color: #181920;
+  font-family: Lemon, Arial;
+  margin: 0;
+  width: 100vw;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  main {
+    padding: 2em;
+
+    .coins-info-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+
+      .coin-info:nth-child(even) .change-percent {
+        color: $green;
+      }
+
+      .coin-info:nth-child(odd) .change-percent {
+        color: $red;
+      }
+
+      .coin-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        font-size: 0.8rem;
+
+        .coin-title {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4em;
+          width: 25%;
+
+          &:nth-child(1) {
+            text-wrap: wrap;
+            word-wrap: break-word;
+          }
+
+          .coin-symbol {
+            color: gray;
+            font-size: 0.8em;
+          }
+        }
+
+        .percentage-arrow {
+          background: rgba($green, $alpha: 0.14);
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 1.5px solid $green;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          box-sizing: border-box;
+
+          :nth-child(1) {
+            width: 2px;
+            height: 8px;
+            background-color: #15634e;
+            // border-radius: 20px;
+            position: absolute;
+          }
+
+          :nth-child(2) {
+            width: 0;
+            height: 0;
+            margin-top: 5px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 7px solid #15634e;
+            // border-radius: 10px;
+            transform: rotate(180deg);
+          }
+        }
+
+        .change-percent {
+          min-width: 4em;
+        }
+
+        .current-price {
+          min-width: 25%;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
