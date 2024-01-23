@@ -69,12 +69,11 @@ init();
 let direction: number = 1;
 let speed: number = 1;
 let velocity: number = 1;
-let delayTime: number = 2000;
+let scrollDelay: number = 2000;
 
 function scrollCoins() {
   if (coinsList) {
     setInterval(() => {
-      console.log(direction * speed * velocity);
       coinsList.scrollBy(0, direction * speed * velocity);
 
       if (
@@ -83,34 +82,36 @@ function scrollCoins() {
       ) {
         setTimeout(() => {
           direction = -1;
-        }, delayTime);
+        }, scrollDelay);
       } else if (coinsList.scrollTop === 0) {
         setTimeout(() => {
           direction = 1;
-        }, delayTime);
+        }, scrollDelay);
       }
     }, 15);
   }
 }
 
-function handleScroll(e, newVelocity: number = 0) {
-  if (e.target.classList.contains("coins-list")) e.stopPropagation();
-  if (newVelocity === 0) {
-    velocity = newVelocity;
-  } else {
-    setTimeout(() => {
-      velocity = newVelocity;
-    }, delayTime);
-  }
+let scrollTimeoutId: number | undefined;
+
+function stopScrollingCoinsList() {
+  clearTimeout(scrollTimeoutId);
+  velocity = 0;
 }
 
-coinsList?.addEventListener("mouseover", (e) => handleScroll(e, 0));
-coinsList?.addEventListener("touchmove", (e) => handleScroll(e, 0));
-coinsList?.addEventListener("mouseleave", (e) => handleScroll(e, 1));
-coinsList?.addEventListener("touchend", (e) => handleScroll(e, 1));
+function scrollCoinsList() {
+  scrollTimeoutId = setTimeout(() => {
+    velocity = 1;
+  }, scrollDelay);
+}
+
+coinsList?.addEventListener("mouseover", stopScrollingCoinsList);
+coinsList?.addEventListener("touchmove", stopScrollingCoinsList);
+coinsList?.addEventListener("mouseleave", scrollCoinsList);
+coinsList?.addEventListener("touchend", scrollCoinsList);
 
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     scrollCoins();
-  }, 1000);
+  }, scrollDelay);
 });

@@ -93,45 +93,41 @@ init();
 var direction = 1;
 var speed = 1;
 var velocity = 1;
-var delayTime = 2000;
+var scrollDelay = 2000;
 function scrollCoins() {
     if (coinsList) {
         setInterval(function () {
-            console.log(direction * speed * velocity);
             coinsList.scrollBy(0, direction * speed * velocity);
             if (coinsList.scrollTop >=
                 coinsList.scrollHeight - coinsList.clientHeight) {
                 setTimeout(function () {
                     direction = -1;
-                }, delayTime);
+                }, scrollDelay);
             }
             else if (coinsList.scrollTop === 0) {
                 setTimeout(function () {
                     direction = 1;
-                }, delayTime);
+                }, scrollDelay);
             }
         }, 15);
     }
 }
-function handleScroll(e, newVelocity) {
-    if (newVelocity === void 0) { newVelocity = 0; }
-    if (e.target.classList.contains("coins-list"))
-        e.stopPropagation();
-    if (newVelocity === 0) {
-        velocity = newVelocity;
-    }
-    else {
-        setTimeout(function () {
-            velocity = newVelocity;
-        }, delayTime);
-    }
+var scrollTimeoutId;
+function stopScrollingCoinsList() {
+    clearTimeout(scrollTimeoutId);
+    velocity = 0;
 }
-coinsList === null || coinsList === void 0 ? void 0 : coinsList.addEventListener("mouseover", function (e) { return handleScroll(e, 0); });
-coinsList === null || coinsList === void 0 ? void 0 : coinsList.addEventListener("touchmove", function (e) { return handleScroll(e, 0); });
-coinsList === null || coinsList === void 0 ? void 0 : coinsList.addEventListener("mouseleave", function (e) { return handleScroll(e, 1); });
-coinsList === null || coinsList === void 0 ? void 0 : coinsList.addEventListener("touchend", function (e) { return handleScroll(e, 1); });
+function scrollCoinsList() {
+    scrollTimeoutId = setTimeout(function () {
+        velocity = 1;
+    }, scrollDelay);
+}
+coinsList === null || coinsList === void 0 ? void 0 : coinsList.addEventListener("mouseover", stopScrollingCoinsList);
+coinsList === null || coinsList === void 0 ? void 0 : coinsList.addEventListener("touchmove", stopScrollingCoinsList);
+coinsList === null || coinsList === void 0 ? void 0 : coinsList.addEventListener("mouseleave", scrollCoinsList);
+coinsList === null || coinsList === void 0 ? void 0 : coinsList.addEventListener("touchend", scrollCoinsList);
 document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
         scrollCoins();
-    }, 1000);
+    }, scrollDelay);
 });
