@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var API_URL = "https://api.coincap.io/v2/assets";
-var coinsInfoContainer = document.querySelector(".coins-list");
+var coinsList = document.querySelector(".coins-list");
 function fetchCoinData() {
     return __awaiter(this, void 0, void 0, function () {
         var response, data, error_1;
@@ -63,7 +63,7 @@ function fetchCoinData() {
 function renderCoins(coins) {
     coins.forEach(function (coin) {
         var coinElement = createCoinElement(coin);
-        coinsInfoContainer === null || coinsInfoContainer === void 0 ? void 0 : coinsInfoContainer.appendChild(coinElement);
+        coinsList === null || coinsList === void 0 ? void 0 : coinsList.appendChild(coinElement);
     });
 }
 function createCoinElement(coin) {
@@ -90,3 +90,13 @@ function init() {
     });
 }
 init();
+function scrollCoins() {
+    setInterval(function () {
+        coinsList === null || coinsList === void 0 ? void 0 : coinsList.scrollBy(0, 1);
+    }, 30);
+}
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+        scrollCoins();
+    }, 1000);
+});

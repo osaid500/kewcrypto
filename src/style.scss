@@ -21,7 +21,6 @@ body {
       display: flex;
       flex-direction: column;
       gap: 1em;
-      // border: 1px solid green;
       height: 30em;
       overflow-y: scroll;
 
@@ -104,7 +103,7 @@ body {
 
         &.up {
           .percentage-arrow {
-            @include percentageArrowProps($green, #15634e, 0deg, -5px);
+            @include percentageArrowProps($green, $green, 0deg, -5px);
           }
 
           .change-percent {
@@ -114,7 +113,7 @@ body {
 
         &.down {
           .percentage-arrow {
-            @include percentageArrowProps($red, #ef476f, 180deg, 5px);
+            @include percentageArrowProps($red, $red, 180deg, 5px);
           }
 
           .change-percent {

@@ -1,6 +1,6 @@
 const API_URL = "https://api.coincap.io/v2/assets";
 
-const coinsInfoContainer = document.querySelector(".coins-list");
+const coinsList = document.querySelector(".coins-list");
 
 async function fetchCoinData(): Promise<Coin[]> {
   try {
@@ -31,7 +31,7 @@ interface Coin {
 function renderCoins(coins: Coin[]): void {
   coins.forEach((coin) => {
     const coinElement = createCoinElement(coin);
-    coinsInfoContainer?.appendChild(coinElement);
+    coinsList?.appendChild(coinElement);
   });
 }
 
@@ -65,3 +65,15 @@ async function init(): Promise<void> {
 }
 
 init();
+
+function scrollCoins() {
+  setInterval(() => {
+    coinsList?.scrollBy(0, 1);
+  }, 30);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    scrollCoins();
+  }, 1000);
+});
