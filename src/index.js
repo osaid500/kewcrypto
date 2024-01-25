@@ -72,7 +72,7 @@ function createCoinElement(coin) {
     var logoUrl = "https://coinicons-api.vercel.app/api/icon/".concat(coin.symbol.toLocaleLowerCase());
     coinElement.classList.add("coin-info");
     coinElement.classList.add(arrowDirection);
-    coinElement.innerHTML = "<img class=\"coin-logo\" src=".concat(logoUrl, "></img>\n  <div class=\"coin-title\">\n  <span>").concat(coin.name, "</span>\n      <span class=\"coin-symbol\">").concat(coin.symbol, "</span>\n    </div>\n    <div class=\"percentage-arrow\">\n    <span></span>\n    <span></span>\n    </div>\n    <div class=\"change-percent\">\n      <span>").concat(Number(coin.changePercent24Hr).toFixed(2), "%</span>\n    </div>\n    <div class=\"current-price\">$").concat(Number(coin.priceUsd).toFixed(2), "</div>");
+    coinElement.innerHTML = "<img class=\"coin-logo\" src=".concat(logoUrl, "></img>\n  <div class=\"coin-title\">\n  <span class=\"coin-name\">").concat(coin.name, "</span>\n      <span class=\"coin-symbol\">").concat(coin.symbol, "</span>\n    </div>\n    <div class=\"percentage-arrow\">\n    <span></span>\n    <span></span>\n    </div>\n    <div class=\"change-percent\">\n      <span>").concat(Number(coin.changePercent24Hr).toFixed(2), "%</span>\n    </div>\n    <div class=\"current-price\">$").concat(Number(coin.priceUsd).toFixed(2), "</div>");
     return coinElement;
 }
 function init() {

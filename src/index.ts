@@ -45,7 +45,7 @@ function createCoinElement(coin: Coin): HTMLElement {
   coinElement.classList.add(arrowDirection);
   coinElement.innerHTML = `<img class="coin-logo" src=${logoUrl}></img>
   <div class="coin-title">
-  <span>${coin.name}</span>
+  <span class="coin-name">${coin.name}</span>
       <span class="coin-symbol">${coin.symbol}</span>
     </div>
     <div class="percentage-arrow">

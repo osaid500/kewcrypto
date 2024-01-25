@@ -1,10 +1,13 @@
+let coinName = "bitcoin";
+let myChart;
+
 async function fetchCoins() {
   try {
     const response = await fetch(
-      "https://api.coincap.io/v2/assets/bitcoin/history?interval=m1"
+      `https://api.coincap.io/v2/assets/${coinName}/history?interval=m1`
     );
     const { data } = await response.json();
-    console.log(data);
+
     return data;
   } catch (error) {
     console.error("Error fetching coin data:", error);
@@ -12,24 +15,38 @@ async function fetchCoins() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const coinData = await fetchCoins();
-  console.log(coinData[0].priceUsd);
+async function handleListClick(e) {
+  const coinElement = e.target.closest(".coin-info");
+  coinName = coinElement.querySelector(".coin-name").textContent.toLowerCase();
 
-  const data = [];
-  let prev = 100;
+  currentCoinName = coinName;
+
+  const newData = await prepareChartData();
+  // set the data to an empty array
+  myChart.config.data.datasets[0].data = [];
+  myChart.update();
+
+  // update the data
+  myChart.config.data.datasets[0].data = newData;
+  myChart.update();
+}
+
+coinsList.addEventListener("click", handleListClick);
+
+async function prepareChartData() {
+  let data = [];
+  coinData = await fetchCoins(coinName);
   for (let i = 0; i < coinData.length; i++) {
     const date = new Date(coinData[i].time);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const formattedTime = `${hours}:${minutes}`;
-    prev = coinData[i].priceUsd;
-    data.push({ x: date, y: prev });
+    price = coinData[i].priceUsd;
+    data.push({ x: date, y: price });
   }
 
-  console.log(data);
+  return data;
+}
 
-  const totalDuration = 10000;
+async function chart(data) {
+  const totalDuration = 4000;
   const delayBetweenPoints = totalDuration / data.length;
   const previousY = (ctx) =>
     ctx.index === 0
@@ -39,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           .data[ctx.index - 1].getProps(["y"], true).y;
 
   const ctx = document.getElementById("myChart");
-  new Chart(ctx, {
+  myChart = new Chart(ctx, {
     type: "line",
     data: {
       datasets: [
@@ -93,4 +110,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       },
     },
   });
-});
+}
+
+prepareChartData().then((data) => chart(data));
