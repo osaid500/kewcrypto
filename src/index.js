@@ -91,7 +91,7 @@ function init() {
 }
 init();
 var direction = 1;
-var speed = 1;
+var speed = 0;
 var velocity = 1;
 var scrollDelay = 2000;
 function scrollCoins() {

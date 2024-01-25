@@ -97,11 +97,7 @@ body {
           flex-direction: column;
           gap: 0.4em;
           width: 25%;
-
-          &:nth-child(1) {
-            text-wrap: wrap;
-            word-wrap: break-word;
-          }
+          overflow-wrap: break-word;
 
           .coin-symbol {
             color: gray;
@@ -183,7 +179,7 @@ body {
         }
 
         .current-price {
-          min-width: 25%;
+          min-width: 27%;
           text-align: right;
         }
       }

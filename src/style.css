@@ -84,10 +84,7 @@ body main .coins-list .coin-info .coin-title {
   flex-direction: column;
   gap: 0.4em;
   width: 25%;
-}
-body main .coins-list .coin-info .coin-title:nth-child(1) {
-  text-wrap: wrap;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 body main .coins-list .coin-info .coin-title .coin-symbol {
   color: gray;
@@ -152,7 +149,7 @@ body main .coins-list .coin-info .change-percent {
   min-width: 4em;
 }
 body main .coins-list .coin-info .current-price {
-  min-width: 25%;
+  min-width: 27%;
   text-align: right;
 }
 
