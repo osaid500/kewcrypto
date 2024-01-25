@@ -4,7 +4,7 @@ let myChart;
 async function fetchCoins() {
   try {
     const response = await fetch(
-      `https://api.coincap.io/v2/assets/${coinId}/history?interval=m1`
+      `https://api.coincap.io/v2/assets/${coinId}/history?interval=m15`
     );
     const { data } = await response.json();
 
@@ -25,11 +25,14 @@ async function fetchCoins() {
 
 async function handleListClick(e) {
   const coinElement = e.target.closest(".coin-info");
+
+  // return if user didn't click on any coin element
+  if (!coinElement) return;
+
   const coinText = coinElement.querySelector(".coin-name").textContent;
-
   coinId = coins.find((coin) => coin.name === coinText).id;
-
   const newData = await prepareChartData();
+
   // set the data to an empty array
   myChart.config.data.datasets[0].data = [];
   myChart.update();
