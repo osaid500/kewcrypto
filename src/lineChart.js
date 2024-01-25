@@ -53,8 +53,6 @@ async function prepareChartData() {
     data.push({ x: date, y: price });
   }
 
-  console.log(data);
-
   return data;
 }
 
@@ -86,6 +84,7 @@ function chart(data) {
           borderColor: "#606470",
           borderWidth: 1,
           radius: 0,
+          tension: 0.5,
           data: data,
         },
       ],
@@ -124,6 +123,14 @@ function chart(data) {
       },
       plugins: {
         legend: false,
+        tooltip: {
+          callbacks: {
+            label: (context) => {
+              return `$${context.formattedValue}`;
+            },
+          },
+          displayColors: false,
+        },
       },
       scales: {
         x: {
