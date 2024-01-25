@@ -1,12 +1,14 @@
 const API_URL = "https://api.coincap.io/v2/assets";
 
 const coinsList = document.querySelector(".coins-list");
+let coins: Coin[] = [];
 
 async function fetchCoinData(): Promise<Coin[]> {
   try {
     const response = await fetch(API_URL);
     const { data } = await response.json();
-    return data;
+    coins = data;
+    return coins;
   } catch (error) {
     console.error("Error fetching coin data:", error);
     return [];

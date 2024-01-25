@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var API_URL = "https://api.coincap.io/v2/assets";
 var coinsList = document.querySelector(".coins-list");
+var coins = [];
 function fetchCoinData() {
     return __awaiter(this, void 0, void 0, function () {
         var response, data, error_1;
@@ -50,7 +51,8 @@ function fetchCoinData() {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = (_a.sent()).data;
-                    return [2 /*return*/, data];
+                    coins = data;
+                    return [2 /*return*/, coins];
                 case 3:
                     error_1 = _a.sent();
                     console.error("Error fetching coin data:", error_1);

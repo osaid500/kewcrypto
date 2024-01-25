@@ -1,19 +1,19 @@
-let coinName = "bitcoin";
+let coinId = "bitcoin";
 let myChart;
 
 async function fetchCoins() {
   try {
     const response = await fetch(
-      `https://api.coincap.io/v2/assets/${coinName}/history?interval=m1`
+      `https://api.coincap.io/v2/assets/${coinId}/history?interval=m1`
     );
     const { data } = await response.json();
 
     // if the data returned is empty, throw an error
     if (data.length === 0) {
       alert(
-        `Sorry, we couldn't retrieve data for '${coinName}' analytics at the moment. Please try again later.`
+        `Sorry, we couldn't retrieve data for '${coinId}' analytics at the moment. Please try again later.`
       );
-      throw new Error(`Data retrieval for '${coinName}' analytics failed.`);
+      throw new Error(`Data retrieval for '${coinId}' analytics failed.`);
     }
 
     return data;
@@ -25,9 +25,9 @@ async function fetchCoins() {
 
 async function handleListClick(e) {
   const coinElement = e.target.closest(".coin-info");
-  coinName = coinElement.querySelector(".coin-name").textContent.toLowerCase();
+  const coinText = coinElement.querySelector(".coin-name").textContent;
 
-  currentCoinName = coinName;
+  coinId = coins.find((coin) => coin.name === coinText).id;
 
   const newData = await prepareChartData();
   // set the data to an empty array
@@ -43,7 +43,7 @@ coinsList.addEventListener("click", handleListClick);
 
 async function prepareChartData() {
   let data = [];
-  coinData = await fetchCoins(coinName);
+  coinData = await fetchCoins(coinId);
   for (let i = 0; i < coinData.length; i++) {
     const date = new Date(coinData[i].time);
     price = coinData[i].priceUsd;
