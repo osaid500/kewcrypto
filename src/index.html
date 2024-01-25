@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+
     <title>Kewcrypto</title>
   </head>
   <body>
@@ -30,7 +31,16 @@
           <div class="current-price">$45,200.30</div>
         </article>
       </section>
+
+      <div class="chart-box">
+        <canvas id="myChart"></canvas>
+      </div>
     </main>
     <script src="index.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+    <script src="lineChart.js"></script>
   </body>
 </html>

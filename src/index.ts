@@ -67,7 +67,7 @@ async function init(): Promise<void> {
 init();
 
 let direction: number = 1;
-let speed: number = 0;
+let speed: number = 1;
 let velocity: number = 1;
 let scrollDelay: number = 2000;
 

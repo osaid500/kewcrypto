@@ -152,5 +152,8 @@ body main .coins-list .coin-info .current-price {
   min-width: 27%;
   text-align: right;
 }
+body main .chart-box {
+  width: 100%;
+}
 
 /*# sourceMappingURL=style.css.map */
