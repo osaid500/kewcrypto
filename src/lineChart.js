@@ -8,6 +8,14 @@ async function fetchCoins() {
     );
     const { data } = await response.json();
 
+    // if the data returned is empty, throw an error
+    if (data.length === 0) {
+      alert(
+        `Sorry, we couldn't retrieve data for '${coinName}' analytics at the moment. Please try again later.`
+      );
+      throw new Error(`Data retrieval for '${coinName}' analytics failed.`);
+    }
+
     return data;
   } catch (error) {
     console.error("Error fetching coin data:", error);
@@ -45,7 +53,7 @@ async function prepareChartData() {
   return data;
 }
 
-async function chart(data) {
+function chart(data) {
   const totalDuration = 4000;
   const delayBetweenPoints = totalDuration / data.length;
   const previousY = (ctx) =>
