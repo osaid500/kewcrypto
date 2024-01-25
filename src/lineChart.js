@@ -4,7 +4,7 @@ let myChart;
 async function fetchCoins() {
   try {
     const response = await fetch(
-      `https://api.coincap.io/v2/assets/${coinId}/history?interval=m15`
+      `https://api.coincap.io/v2/assets/${coinId}/history?interval=m1`
     );
     const { data } = await response.json();
 
@@ -53,10 +53,13 @@ async function prepareChartData() {
     data.push({ x: date, y: price });
   }
 
+  console.log(data);
+
   return data;
 }
 
 function chart(data) {
+  // animation
   const totalDuration = 4000;
   const delayBetweenPoints = totalDuration / data.length;
   const previousY = (ctx) =>
@@ -66,13 +69,21 @@ function chart(data) {
           .getDatasetMeta(ctx.datasetIndex)
           .data[ctx.index - 1].getProps(["y"], true).y;
 
-  const ctx = document.getElementById("myChart");
+  // canvas
+  const ctx = document.getElementById("myChart").getContext("2d");
+
+  let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, "#24243e");
+  gradient.addColorStop(1, "#0f0c29");
+
   myChart = new Chart(ctx, {
     type: "line",
     data: {
       datasets: [
         {
-          borderColor: "#73b9d7",
+          backgroundColor: gradient,
+          fill: true,
+          borderColor: "#606470",
           borderWidth: 1,
           radius: 0,
           data: data,
