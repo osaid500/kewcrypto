@@ -92,13 +92,6 @@ function chart(data) {
     options: {
       maintainAspectRatio: false,
 
-      layout: {
-        padding: {
-          // left: -10,
-          // bottom: -10,
-        },
-      },
-
       animation: {
         x: {
           type: "number",
