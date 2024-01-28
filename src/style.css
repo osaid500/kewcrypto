@@ -21,6 +21,7 @@ body main .coin-analytics-section {
 }
 body main .coin-analytics-section .coin-analytics-info {
   padding: 0 1rem;
+  box-sizing: border-box;
 }
 body main .coin-analytics-section .coin-analytics-info p {
   color: gray;
