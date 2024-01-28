@@ -1,6 +1,8 @@
 let coinId = "bitcoin";
 let myChart;
 
+const chartButtons = document.querySelectorAll("#chart-button");
+
 async function fetchCoins() {
   try {
     const response = await fetch(
@@ -46,7 +48,14 @@ async function handleListClick(e) {
   myChart.update();
 }
 
+function handleChartButton(e) {
+  console.log(e.target.value);
+}
+
 coinsList.addEventListener("click", handleListClick);
+chartButtons.forEach((button) =>
+  button.addEventListener("click", handleChartButton)
+);
 
 async function prepareChartData() {
   let data = [];
