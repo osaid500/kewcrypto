@@ -64,8 +64,10 @@ function createCoinElement(coin: Coin): HTMLElement {
 function updateChartTop(title: string, price: string) {
   const chartTitleElement = document.querySelector("#chart-title");
   const chartPriceElement = document.querySelector("#chart-price");
-
   if (chartTitleElement && chartPriceElement) {
+    // scroll to chart section
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     chartTitleElement.textContent = title;
 
     chartPriceElement.textContent = parseFloat(price).toLocaleString("en-US", {
@@ -79,6 +81,7 @@ function updateChartTop(title: string, price: string) {
 
 async function init(): Promise<void> {
   const coinData = await fetchCoinData();
+  updateChartTop(coins[0]?.name, coins[0]?.priceUsd);
   renderCoins(coinData);
 }
 

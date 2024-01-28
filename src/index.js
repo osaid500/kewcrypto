@@ -81,6 +81,8 @@ function updateChartTop(title, price) {
     var chartTitleElement = document.querySelector("#chart-title");
     var chartPriceElement = document.querySelector("#chart-price");
     if (chartTitleElement && chartPriceElement) {
+        // scroll to chart section
+        window.scrollTo({ top: 0, behavior: "smooth" });
         chartTitleElement.textContent = title;
         chartPriceElement.textContent = parseFloat(price).toLocaleString("en-US", {
             style: "currency",
@@ -91,13 +93,15 @@ function updateChartTop(title, price) {
     }
 }
 function init() {
+    var _a, _b;
     return __awaiter(this, void 0, void 0, function () {
         var coinData;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(this, function (_c) {
+            switch (_c.label) {
                 case 0: return [4 /*yield*/, fetchCoinData()];
                 case 1:
-                    coinData = _a.sent();
+                    coinData = _c.sent();
+                    updateChartTop((_a = coins[0]) === null || _a === void 0 ? void 0 : _a.name, (_b = coins[0]) === null || _b === void 0 ? void 0 : _b.priceUsd);
                     renderCoins(coinData);
                     return [2 /*return*/];
             }
