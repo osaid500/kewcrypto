@@ -90,6 +90,15 @@ function chart(data) {
       ],
     },
     options: {
+      maintainAspectRatio: false,
+
+      layout: {
+        padding: {
+          // left: -10,
+          // bottom: -10,
+        },
+      },
+
       animation: {
         x: {
           type: "number",
@@ -135,6 +144,14 @@ function chart(data) {
       scales: {
         x: {
           type: "time",
+          ticks: {
+            display: false,
+          },
+        },
+        y: {
+          ticks: {
+            display: false,
+          },
         },
       },
     },

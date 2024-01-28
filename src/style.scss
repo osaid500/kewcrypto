@@ -4,190 +4,231 @@ $green: #06d6a0;
 $red: #ef476f;
 
 body {
-  background-color: #181920;
   font-family: Lemon, Arial;
   margin: 0;
-  width: 100vw;
+  width: 100%;
   color: white;
-
+  background-color: #181920;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  // overflow-x: hidden;
 
   main {
-    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    box-sizing: border-box;
+    // align-items: center;
 
-    .coins-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-      min-width: 20rem;
-      max-width: 30rem;
-      height: 30em;
-      overflow-y: scroll;
-      margin-bottom: 4rem;
+    .coin-analytics-section {
+      max-width: 40rem;
 
-      &::-webkit-scrollbar {
-        display: none;
+      .coin-analytics-info {
+        padding: 0 1rem;
+        p {
+          color: gray;
+        }
       }
 
-      .coin-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.8rem;
-        min-height: 5em;
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-        transform: perspective(1500px) rotateY(15deg);
-        border-radius: 1rem;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 40px -10px;
-        transition: all 0.4s;
-        margin-left: 10px;
+      .chart-box {
+        width: 100%;
+        // padding: 2em;
 
-        &::before {
-          content: "";
-          width: 1em;
-          height: 1em;
-          transition: all 0.6s ease;
-          background-color: #fd5f00;
-          filter: blur(10);
-
-          transform: scale(10.1) translateX(12px);
-          position: absolute;
-          bottom: 50%;
-          right: 0;
-          border-radius: 50%;
-        }
-
-        &::after {
-          content: "";
-          width: 1em;
-          height: 1em;
-          background-color: #2f24c1;
-          transition: all 0.6s;
-          transition-delay: 0.2s;
-          transform: scale(0.1);
-          position: absolute;
-          top: -10px;
-          left: -20px;
-          border-radius: 30%;
-        }
-
-        &:hover {
-          transform: perspective(3000px) rotateY(5deg) rotateX(10deg);
-
-          &::before {
-            transform: scale(13) translateX(0);
-          }
-
-          &::after {
-            transform: scale(10);
-          }
-        }
-
-        .coin-logo {
-          margin-left: 10px;
-          width: 2em;
-          z-index: 2;
-        }
-
-        .coin-title {
-          display: flex;
-          flex-direction: column;
-          gap: 0.4em;
-          width: 25%;
-          overflow-wrap: break-word;
-
-          .coin-symbol {
-            color: gray;
-            font-size: 0.8em;
-          }
-        }
-
-        * {
-          z-index: 1;
-        }
-
-        @mixin percentageArrowProps(
-          $color,
-          $arrow-color,
-          $angle,
-          $arrow-margin
-        ) {
-          background: rgba($color, $alpha: 0.14);
-          border-color: $color;
-
-          :nth-child(1) {
-            background-color: $arrow-color;
-          }
-
-          :nth-child(2) {
-            margin-top: $arrow-margin;
-            border-bottom: 7px solid $arrow-color;
-            transform: rotate($angle);
-          }
-        }
-
-        .percentage-arrow {
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          border: 1.5px solid;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          box-sizing: border-box;
-
-          :nth-child(1) {
-            width: 2px;
-            height: 8px;
-            position: absolute;
-          }
-
-          :nth-child(2) {
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-          }
-        }
-
-        &.up {
-          .percentage-arrow {
-            @include percentageArrowProps($green, $green, 0deg, -5px);
-          }
-
-          .change-percent {
-            color: $green;
-          }
-        }
-
-        &.down {
-          .percentage-arrow {
-            @include percentageArrowProps($red, $red, 180deg, 5px);
-          }
-
-          .change-percent {
-            color: $red;
-          }
-        }
-
-        .change-percent {
-          min-width: 4em;
-        }
-
-        .current-price {
-          min-width: 27%;
-          text-align: right;
+        #myChart {
+          width: 100%;
+          min-height: 20rem;
         }
       }
     }
 
-    .chart-box {
+    .coins-section {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      height: fit-content;
+      border-radius: 1rem;
+      // padding: 0 1rem;
       width: 100%;
+      justify-content: center;
+      align-items: center;
+
+      h2 {
+        width: 100%;
+        padding-left: 1rem;
+        box-sizing: border-box;
+      }
+
+      .coins-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        min-width: 20rem;
+        width: 100%;
+        // max-width: 30rem;
+        height: 30em;
+        overflow-y: scroll;
+        margin-bottom: 4rem;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .coin-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 0.8rem;
+          min-height: 5em;
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          transform: perspective(1500px) rotateY(15deg);
+          border-radius: 1rem;
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 40px -10px;
+          transition: all 0.4s;
+          padding-left: 10px;
+
+          &::before {
+            content: "";
+            width: 1em;
+            height: 1em;
+            transition: all 0.6s ease;
+            background-color: #fd5f00;
+            filter: blur(10);
+
+            transform: scale(10.1) translateX(12px);
+            position: absolute;
+            bottom: 50%;
+            right: 0;
+            border-radius: 50%;
+          }
+
+          &::after {
+            content: "";
+            width: 1em;
+            height: 1em;
+            background-color: #2f24c1;
+            transition: all 0.6s;
+            transition-delay: 0.2s;
+            transform: scale(0.1);
+            position: absolute;
+            top: -10px;
+            left: -20px;
+            border-radius: 30%;
+          }
+
+          &:hover {
+            transform: perspective(3000px) rotateY(5deg) rotateX(10deg);
+
+            &::before {
+              transform: scale(13) translateX(0);
+            }
+
+            &::after {
+              transform: scale(10);
+            }
+          }
+
+          .coin-logo {
+            margin-left: 10px;
+            width: 2em;
+            z-index: 2;
+          }
+
+          .coin-title {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4em;
+            width: 25%;
+            overflow-wrap: break-word;
+
+            .coin-symbol {
+              color: gray;
+              font-size: 0.8em;
+            }
+          }
+
+          * {
+            z-index: 1;
+          }
+
+          @mixin percentageArrowProps(
+            $color,
+            $arrow-color,
+            $angle,
+            $arrow-margin
+          ) {
+            background: rgba($color, $alpha: 0.14);
+            border-color: $color;
+
+            :nth-child(1) {
+              background-color: $arrow-color;
+            }
+
+            :nth-child(2) {
+              margin-top: $arrow-margin;
+              border-bottom: 7px solid $arrow-color;
+              transform: rotate($angle);
+            }
+          }
+
+          .percentage-arrow {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1.5px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-sizing: border-box;
+
+            :nth-child(1) {
+              width: 2px;
+              height: 8px;
+              position: absolute;
+            }
+
+            :nth-child(2) {
+              width: 0;
+              height: 0;
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
+            }
+          }
+
+          &.up {
+            .percentage-arrow {
+              @include percentageArrowProps($green, $green, 0deg, -5px);
+            }
+
+            .change-percent {
+              color: $green;
+            }
+          }
+
+          &.down {
+            .percentage-arrow {
+              @include percentageArrowProps($red, $red, 180deg, 5px);
+            }
+
+            .change-percent {
+              color: $red;
+            }
+          }
+
+          .change-percent {
+            min-width: 4em;
+          }
+
+          .current-price {
+            min-width: 27%;
+            text-align: right;
+          }
+        }
+      }
     }
   }
 }

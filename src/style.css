@@ -1,31 +1,66 @@
 @import url("https://fonts.googleapis.com/css2?family=Lemon&display=swap");
 body {
-  background-color: #181920;
   font-family: Lemon, Arial;
   margin: 0;
-  width: 100vw;
+  width: 100%;
   color: white;
+  background-color: #181920;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 body main {
-  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  box-sizing: border-box;
 }
-body main .coins-list {
+body main .coin-analytics-section {
+  max-width: 40rem;
+}
+body main .coin-analytics-section .coin-analytics-info {
+  padding: 0 1rem;
+}
+body main .coin-analytics-section .coin-analytics-info p {
+  color: gray;
+}
+body main .coin-analytics-section .chart-box {
+  width: 100%;
+}
+body main .coin-analytics-section .chart-box #myChart {
+  width: 100%;
+  min-height: 20rem;
+}
+body main .coins-section {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 1rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+body main .coins-section h2 {
+  width: 100%;
+  padding-left: 1rem;
+  box-sizing: border-box;
+}
+body main .coins-section .coins-list {
   display: flex;
   flex-direction: column;
   gap: 1em;
   min-width: 20rem;
-  max-width: 30rem;
+  width: 100%;
   height: 30em;
   overflow-y: scroll;
   margin-bottom: 4rem;
 }
-body main .coins-list::-webkit-scrollbar {
+body main .coins-section .coins-list::-webkit-scrollbar {
   display: none;
 }
-body main .coins-list .coin-info {
+body main .coins-section .coins-list .coin-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,9 +73,9 @@ body main .coins-list .coin-info {
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 40px -10px;
   transition: all 0.4s;
-  margin-left: 10px;
+  padding-left: 10px;
 }
-body main .coins-list .coin-info::before {
+body main .coins-section .coins-list .coin-info::before {
   content: "";
   width: 1em;
   height: 1em;
@@ -53,7 +88,7 @@ body main .coins-list .coin-info::before {
   right: 0;
   border-radius: 50%;
 }
-body main .coins-list .coin-info::after {
+body main .coins-section .coins-list .coin-info::after {
   content: "";
   width: 1em;
   height: 1em;
@@ -66,35 +101,35 @@ body main .coins-list .coin-info::after {
   left: -20px;
   border-radius: 30%;
 }
-body main .coins-list .coin-info:hover {
+body main .coins-section .coins-list .coin-info:hover {
   transform: perspective(3000px) rotateY(5deg) rotateX(10deg);
 }
-body main .coins-list .coin-info:hover::before {
+body main .coins-section .coins-list .coin-info:hover::before {
   transform: scale(13) translateX(0);
 }
-body main .coins-list .coin-info:hover::after {
+body main .coins-section .coins-list .coin-info:hover::after {
   transform: scale(10);
 }
-body main .coins-list .coin-info .coin-logo {
+body main .coins-section .coins-list .coin-info .coin-logo {
   margin-left: 10px;
   width: 2em;
   z-index: 2;
 }
-body main .coins-list .coin-info .coin-title {
+body main .coins-section .coins-list .coin-info .coin-title {
   display: flex;
   flex-direction: column;
   gap: 0.4em;
   width: 25%;
   overflow-wrap: break-word;
 }
-body main .coins-list .coin-info .coin-title .coin-symbol {
+body main .coins-section .coins-list .coin-info .coin-title .coin-symbol {
   color: gray;
   font-size: 0.8em;
 }
-body main .coins-list .coin-info * {
+body main .coins-section .coins-list .coin-info * {
   z-index: 1;
 }
-body main .coins-list .coin-info .percentage-arrow {
+body main .coins-section .coins-list .coin-info .percentage-arrow {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -105,56 +140,53 @@ body main .coins-list .coin-info .percentage-arrow {
   position: relative;
   box-sizing: border-box;
 }
-body main .coins-list .coin-info .percentage-arrow :nth-child(1) {
+body main .coins-section .coins-list .coin-info .percentage-arrow :nth-child(1) {
   width: 2px;
   height: 8px;
   position: absolute;
 }
-body main .coins-list .coin-info .percentage-arrow :nth-child(2) {
+body main .coins-section .coins-list .coin-info .percentage-arrow :nth-child(2) {
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
 }
-body main .coins-list .coin-info.up .percentage-arrow {
+body main .coins-section .coins-list .coin-info.up .percentage-arrow {
   background: rgba(6, 214, 160, 0.14);
   border-color: #06d6a0;
 }
-body main .coins-list .coin-info.up .percentage-arrow :nth-child(1) {
+body main .coins-section .coins-list .coin-info.up .percentage-arrow :nth-child(1) {
   background-color: #06d6a0;
 }
-body main .coins-list .coin-info.up .percentage-arrow :nth-child(2) {
+body main .coins-section .coins-list .coin-info.up .percentage-arrow :nth-child(2) {
   margin-top: -5px;
   border-bottom: 7px solid #06d6a0;
   transform: rotate(0deg);
 }
-body main .coins-list .coin-info.up .change-percent {
+body main .coins-section .coins-list .coin-info.up .change-percent {
   color: #06d6a0;
 }
-body main .coins-list .coin-info.down .percentage-arrow {
+body main .coins-section .coins-list .coin-info.down .percentage-arrow {
   background: rgba(239, 71, 111, 0.14);
   border-color: #ef476f;
 }
-body main .coins-list .coin-info.down .percentage-arrow :nth-child(1) {
+body main .coins-section .coins-list .coin-info.down .percentage-arrow :nth-child(1) {
   background-color: #ef476f;
 }
-body main .coins-list .coin-info.down .percentage-arrow :nth-child(2) {
+body main .coins-section .coins-list .coin-info.down .percentage-arrow :nth-child(2) {
   margin-top: 5px;
   border-bottom: 7px solid #ef476f;
   transform: rotate(180deg);
 }
-body main .coins-list .coin-info.down .change-percent {
+body main .coins-section .coins-list .coin-info.down .change-percent {
   color: #ef476f;
 }
-body main .coins-list .coin-info .change-percent {
+body main .coins-section .coins-list .coin-info .change-percent {
   min-width: 4em;
 }
-body main .coins-list .coin-info .current-price {
+body main .coins-section .coins-list .coin-info .current-price {
   min-width: 27%;
   text-align: right;
-}
-body main .chart-box {
-  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

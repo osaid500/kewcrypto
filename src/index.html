@@ -9,31 +9,38 @@
   </head>
   <body>
     <main>
-      <section class="coins-section"></section>
-      <h2>Coins</h2>
-      <section class="coins-list">
-        <article class="coin-info down">
-          <img
-            class="coin-logo"
-            src="https://coinicons-api.vercel.app/api/icon/btc"
-          />
-          <div class="coin-title">
-            <span class="coin-name">Bitcoin</span>
-            <span class="coin-symbol">BTC</span>
-          </div>
-          <div class="percentage-arrow">
-            <span></span>
-            <span></span>
-          </div>
-          <div class="change-percent">
-            <span>-4,20%</span>
-          </div>
-          <div class="current-price">$45,200.30</div>
-        </article>
+      <section class="coin-analytics-section">
+        <div class="coin-analytics-info">
+          <p>Bitcoin price</p>
+          <h2>USD 33,281.95</h2>
+        </div>
+        <div class="chart-box">
+          <canvas id="myChart"></canvas>
+        </div>
       </section>
-      <div class="chart-box">
-        <canvas id="myChart"></canvas>
-      </div>
+      <section class="coins-section">
+        <h2>Coins</h2>
+        <section class="coins-list">
+          <article class="coin-info down">
+            <img
+              class="coin-logo"
+              src="https://coinicons-api.vercel.app/api/icon/btc"
+            />
+            <div class="coin-title">
+              <span class="coin-name">Bitcoin</span>
+              <span class="coin-symbol">BTC</span>
+            </div>
+            <div class="percentage-arrow">
+              <span></span>
+              <span></span>
+            </div>
+            <div class="change-percent">
+              <span>-4,20%</span>
+            </div>
+            <div class="current-price">$45,200.30</div>
+          </article>
+        </section>
+      </section>
     </main>
     <script src="index.js"></script>
 
