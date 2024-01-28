@@ -77,6 +77,19 @@ function createCoinElement(coin) {
     coinElement.innerHTML = "<img class=\"coin-logo\" src=".concat(logoUrl, "></img>\n  <div class=\"coin-title\">\n  <span class=\"coin-name\">").concat(coin.name, "</span>\n      <span class=\"coin-symbol\">").concat(coin.symbol, "</span>\n    </div>\n    <div class=\"percentage-arrow\">\n    <span></span>\n    <span></span>\n    </div>\n    <div class=\"change-percent\">\n      <span>").concat(Number(coin.changePercent24Hr).toFixed(2), "%</span>\n    </div>\n    <div class=\"current-price\">$").concat(Number(coin.priceUsd).toFixed(2), "</div>");
     return coinElement;
 }
+function updateChartTop(title, price) {
+    var chartTitleElement = document.querySelector("#chart-title");
+    var chartPriceElement = document.querySelector("#chart-price");
+    if (chartTitleElement && chartPriceElement) {
+        chartTitleElement.textContent = title;
+        chartPriceElement.textContent = parseFloat(price).toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        });
+    }
+}
 function init() {
     return __awaiter(this, void 0, void 0, function () {
         var coinData;

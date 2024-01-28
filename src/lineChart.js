@@ -30,7 +30,11 @@ async function handleListClick(e) {
   if (!coinElement) return;
 
   const coinText = coinElement.querySelector(".coin-name").textContent;
-  coinId = coins.find((coin) => coin.name === coinText).id;
+  const selectedCoin = coins.find((coin) => coin.name === coinText);
+
+  updateChartTop(selectedCoin.name, selectedCoin.priceUsd);
+
+  coinId = selectedCoin.id;
   const newData = await prepareChartData();
 
   // set the data to an empty array

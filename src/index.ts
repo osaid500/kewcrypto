@@ -61,6 +61,22 @@ function createCoinElement(coin: Coin): HTMLElement {
   return coinElement;
 }
 
+function updateChartTop(title: string, price: string) {
+  const chartTitleElement = document.querySelector("#chart-title");
+  const chartPriceElement = document.querySelector("#chart-price");
+
+  if (chartTitleElement && chartPriceElement) {
+    chartTitleElement.textContent = title;
+
+    chartPriceElement.textContent = parseFloat(price).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+}
+
 async function init(): Promise<void> {
   const coinData = await fetchCoinData();
   renderCoins(coinData);
